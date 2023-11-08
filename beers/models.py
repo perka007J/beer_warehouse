@@ -1,8 +1,8 @@
 from django.db import models
-# Create your models here.
+from core.models import CommonInfo
 
 
-class Company(models.Model):
+class Company(CommonInfo):
     name = models.CharField('Nombre', max_length=50)
     tax_number = models.IntegerField('Código', unique=True)
 
@@ -15,7 +15,7 @@ class Company(models.Model):
         return self.name
 
 
-class Beer(models.Model):
+class Beer(CommonInfo):
 
     class Color(models.IntegerChoices):
         YELLO = 1
@@ -43,7 +43,7 @@ class Beer(models.Model):
         return self.name
 
 
-class SpecialIngredients(models.Model):
+class SpecialIngredients(CommonInfo):
     name = models.CharField('Nombre', max_length=50)
     beers = models.ManyToManyField(
         Beer, blank=True, related_name='special_ingredients')
